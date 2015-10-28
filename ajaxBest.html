@@ -114,9 +114,9 @@ function getFormValues(fobj){
 
 
 
-function sendToSpark(myIn){
+function sendToParticle(myIn){
     document.all.myParameter.value = myIn
-    document.myForm.action = 'https://api.spark.io/v1/devices/' + 
+    document.myForm.action = 'https://api.Particle.io/v1/devices/' + 
 
 document.all.myDeviceId.value + '/' + document.all.myFunctionName.value
     myAjax(document.all.myCoolForm, document.myForm.action, 'myDivId')   
@@ -157,7 +157,7 @@ document.all.myDeviceId.value + '/' + document.all.myFunctionName.value
 
 <h2 align=center>Simplist Ajax Web Page for the Particle.io Photon<br> (formerly 
 
-the Spark.io Core) </h2>
+the Particle.io Core) </h2>
 
 
 
@@ -212,47 +212,47 @@ href="http://particle.io/build">http://particle.io/build</a><br><br>
 
 
 <input type="button" value="d7-send-1" onClick="{
-    sendToSpark('d7-send-1')
+    sendToParticle('d7-send-1')
 }">
 
 
 
 <input type="button" value="d7-send-0" onClick="{
-    sendToSpark('d7-send-0')
+    sendToParticle('d7-send-0')
 }"><br>
 
 
 <input type="button" value="d0-read" onClick="{
-    sendToSpark('d0-read')
+    sendToParticle('d0-read')
 }">
 
 
 
 
 <input type="button" value="a1-read" onClick="{
-    sendToSpark('a1-read')
+    sendToParticle('a1-read')
 }"><br>
 
 
 
 <input type="button" value="a4-send-0" onClick="{
-    sendToSpark('a4-send-0')
+    sendToParticle('a4-send-0')
 }">
 
 
 <input type="button" value="a4-send-255" onClick="{
-    sendToSpark('a4-send-255')
+    sendToParticle('a4-send-255')
 }"><br>
 
 
 Examples of your own code, D7 flashes a bunch<br>
 
 <input type="button" value="x1-mine-15" onClick="{
-    sendToSpark('x1-mine-15')
+    sendToParticle('x1-mine-15')
 }">
 
 <input type="button" value="x1-mine-40" onClick="{
-    sendToSpark('x1-mine-40')
+    sendToParticle('x1-mine-40')
 }">
 
 
@@ -272,9 +272,9 @@ Examples of your own code, D7 flashes a bunch<br>
 
 
 
-<input type=button id="myToVolts" value="Convert Sensor reading into Volts" 
+<input type=button id="myToVolts" value="Convert Sensor reading into Volts (if 
 
-onclick="{
+the reading is a volt)" onclick="{
   var myTemp = parseFloat(getElementById('myDivId').innerHTML)
   document.all.myCalc1.value = (myTemp * 3.3 / 4095).toFixed(2);
 }">
@@ -285,10 +285,28 @@ onclick="{
     
 Note: PWM only works on A4, A5 you will have to write your own code for getting 
 
-to work on the other Digital pins<br>
-Below here are examples of sending your own codes<br>
-Use the same code LetterDigit-4 letters-any size number<br>
-A#-AAAA-#####<br>
+to PWM to work on the other Digital pins<br>
+Above are two examples of sending your own codes<br>
+Use the same code LetterDigit-fourletters-any size number<br>
+Example <br>
+A#-AAAA-#####<br><br>
+
+The buttons are very easy to work with. Here is an example of the html code<br>
+<textarea rows=8 cols=70>
+
+
+<input type="button" value="d7-send-1" onClick="{
+    sendToParticle('d7-send-1')
+}">
+
+
+</textarea><br><br>
+
+By Jeremy Ellis<br>
+Use at your own risk<br>
+Website <a href="http://rocksetta.com/">rocksetta.com</a><br>
+Twitter: @rocksetta<br>
+
 
 
 
