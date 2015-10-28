@@ -1,11 +1,18 @@
 
-//PUT YOUR VARIABLES HERE
+//PUT YOUR GLOBAL VARIABLES HERE
+    int myDoNormal = 0;   // 0 not yet set,  1 for normal operation, 2 or higher 
 
+for other numbers for own code
+    int mySetWrite = 0;   
+    int myCount = 0;
+    int pinNumber = 0;
+    String  myActivity = "NONE";
 
-
+    
+ // Any general setup stuff goes here   
 void setup(){
     
-    Spark.function("my-main", myMain);  
+    Particle.function("my-main", myMain);  
     
     //PUT YOUR SETUP CODE HERE. Note: Only three more functions allowed!
     // test everything using the return int from a function!
@@ -18,15 +25,38 @@ void setup(){
 
 }
 
+
+
+
 void loop(){
-    
-    //PUT YOUR LOOP CODE HERE
+     
+// use this area for anything that loops around and around
+
+
+    if (myDoNormal == 2) {  // Now you can do your own code here X = 2
+      if (myCount <=  mySetWrite){
+        myCount ++;
+       
+        pinMode(D7, OUTPUT);
+        digitalWrite(D7, 1);   // D7 On
+        delay(50);
+        
+        pinMode(D7, OUTPUT);
+        digitalWrite(D7, 0);   // D7 Off
+        delay(50);
+      }
+    }  
+
 
 }
 
+// Probably a good idea to leave this stuff alone
+
 int myMain(String myCode) {
     
-    myCode.toUpperCase();           // set argument to uppercase--remove for better security
+    myCode.toUpperCase();           // set argument to uppercase--remove for 
+
+better security
     
     // used send instead of write since I needed it to be 4 characters long.
     
@@ -40,14 +70,24 @@ int myMain(String myCode) {
     // a1-read       read A1
      
     // Block sets pinNumber for digital 0-7 or analog 10-17 from the number
-    int mySetWrite = 0;
-    int pinNumber = myCode.charAt(1) - '0';
+
+
+    pinNumber = myCode.charAt(1) - '0';
     if (pinNumber< 0 || pinNumber >7) return -1; 
-    if (myCode.startsWith("A")){pinNumber = pinNumber+10;}  //+10 is for analog numbers
     
+    if (myCode.startsWith("A")){     // set for analog normal operation
+        pinNumber = pinNumber+10;   //+10 is for analog numbers
+        myDoNormal = 1;
+    }  
+    
+     if (myCode.startsWith("D")){   // set for digital normal operation
+        myDoNormal = 1;
+    }  
     
   
-    String  myActivity = myCode.substring(3,7);     // take 4 characters starting at the 3rd.
+    myActivity = myCode.substring(3,7);     // take 4 characters starting at the 
+
+3rd.
      
     
     //Following sets the 7 and on characters to integers
@@ -56,11 +96,15 @@ int myMain(String myCode) {
         else if(myOptional == "LOW") {mySetWrite = 0; }
             else if(myOptional == "ON") {mySetWrite = 1;}
                 else if(myOptional == "OFF") {mySetWrite = 0; }
-                   else {mySetWrite = myOptional.toInt();  }  // sets  write value
+                   else {mySetWrite = myOptional.toInt();  }  // sets  write 
+
+value
     
     
     // myCode parsing complete
     
+    
+    if ( myDoNormal == 1) {   // sets the pins sort of like Tinker 
     
     if (pinNumber < 9) {   // digital pins activated
    
@@ -78,9 +122,13 @@ int myMain(String myCode) {
         
     }  else {      // analog pins activated
     
-        if (myActivity == "READ"){    //Analog read           // pinMode(pinNumber, INPUT_PULLUP); // sets unknown to max 4095 analog read
+        if (myActivity == "READ"){    //Analog read           // pinMode
+
+(pinNumber, INPUT_PULLUP); // sets unknown to max 4095 analog read
            // pinMode(pinNumber, INPUT); // sets to input
-           // pinMode(pinNumber, INPUT_PULLDOWN); // sets unknown to 0 min analog read
+           // pinMode(pinNumber, INPUT_PULLDOWN); // sets unknown to 0 min 
+
+analog read
            // trying nothing, since with the new version of tinker this works
             return analogRead(pinNumber);
         }
@@ -91,7 +139,68 @@ int myMain(String myCode) {
             return mySetWrite;
         }        
       }
+      
+    } // end myDoNormal loop  
     
-}
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    
+ 
+  // Now put your stuff here.
+   
+    if (myCode.startsWith("X")){   // set for your own codes. 
+        myDoNormal = 2;           // communicates with the main loop
+    }  
+   
+   
+   
+   
+    if ( myDoNormal == 2) {  // example of your own code.
+                             // myDoNormal communicates with the loop procedure
+    
+   
+       if (myCode.startsWith("X1-MINE")){   // notice all capital letters
+                                            // you may still use mySetWrite and 
 
+myActivity
+                                            // you have to look at the code to 
+
+use pinNumber
+             myCount = 0;
+             return mySetWrite;
+        
+       }
+       
+       
+       
+       
+       
+      // write your own code here  see the above example
+       
+       
+       
+       
+       
+       
+       
+       
+  
+    } // end of if statement myDoNormal
+    
+    
+} // end of funciton myMain
 
