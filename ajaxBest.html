@@ -56,16 +56,22 @@ function postData(url, parameters, myDivToChange2){
           var myJsonObject = JSON.parse(xmlHttp.responseText);
              
              
-           //document.getElementById(myDivToChange2).innerHTML=xmlHttp.responseText+' data sent was '+parameters;
+           //document.getElementById
+
+(myDivToChange2).innerHTML=xmlHttp.responseText+' data sent was '+parameters;
          
-           document.getElementById(myDivToChange2).innerHTML= myJsonObject.return_value;
+           document.getElementById(myDivToChange2).innerHTML= 
+
+myJsonObject.return_value;
          
          
          
       }
    }
    xmlHttp.open("POST", url, true);
-   xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   xmlHttp.setRequestHeader("Content-type", "application/x-www-form-
+
+urlencoded");
    xmlHttp.send(parameters);
 }
 
@@ -80,16 +86,24 @@ function getFormValues(fobj){
    for(var i = 0;i < fobj.elements.length;i++){
       switch(fobj.elements[i].type){
          case "text":
-            str += fobj.elements[i].name +"=" + escape(fobj.elements[i].value) + "&";
+            str += fobj.elements[i].name +"=" + escape(fobj.elements[i].value) + 
+
+"&";
             break;         
          case "password":
-            str += fobj.elements[i].name +"=" + escape(fobj.elements[i].value) + "&";
+            str += fobj.elements[i].name +"=" + escape(fobj.elements[i].value) + 
+
+"&";
             break;
          case "textarea":
-            str += fobj.elements[i].name +"=" + escape(fobj.elements[i].value) + "&";
+            str += fobj.elements[i].name +"=" + escape(fobj.elements[i].value) + 
+
+"&";
             break;
          case "select-one":
-             str += fobj.elements[i].name +"=" + fobj.elements[i].options[fobj.elements[i].selectedIndex].value + "&";
+             str += fobj.elements[i].name +"=" + fobj.elements[i].options
+
+[fobj.elements[i].selectedIndex].value + "&";
              break;
      }
    }
@@ -102,7 +116,9 @@ function getFormValues(fobj){
 
 function sendToSpark(myIn){
     document.all.myParameter.value = myIn
-    document.myForm.action = 'https://api.spark.io/v1/devices/' + document.all.myDeviceId.value + '/' + document.all.myFunctionName.value
+    document.myForm.action = 'https://api.spark.io/v1/devices/' + 
+
+document.all.myDeviceId.value + '/' + document.all.myFunctionName.value
     myAjax(document.all.myCoolForm, document.myForm.action, 'myDivId')   
     
 }
@@ -139,21 +155,33 @@ function sendToSpark(myIn){
 
 
 
-<h2 align=center>Simplist Ajax Web Page for the Particle.io Photon<br> (formerly the Spark.io Core) </h2>
+<h2 align=center>Simplist Ajax Web Page for the Particle.io Photon<br> (formerly 
+
+the Spark.io Core) </h2>
 
 
 
-Device ID:<input id="myDeviceId" name="myCoreID" type=password size=50 placeholder="78dd12345678123456"> <br>
+Device ID:<input id="myDeviceId" name="myCoreID" type=password size=50 
+
+placeholder="78dd12345678123456"> <br>
 Get this from the core area when logged in<br>
 
-<input id="myFunctionName" name="myFunction"  type=hidden size=50 value="my-main" > 
+<input id="myFunctionName" name="myFunction"  type=hidden size=50 value="my-
+
+main" > 
 
 <form name="myForm" method="POST" id="myCoolForm" ><br>
 
-<input id="myParameter" name="params" type=text  style="display:none"     size=50 placeholder="d7-send-high"> 
+<input id="myParameter" name="params" type=text  style="display:none"     
 
-Access Token:<input id="myToken" name="access_token" type=password size=50 placeholder="5622ce6bba702ef6bd3456d5ed26aaa4a28d7c9"> <br>
-Get this from the settings area when logged into <a href="http://particle.io/build">http://particle.io/build</a><br><br>
+size=50 placeholder="d7-send-high"> 
+
+Access Token:<input id="myToken" name="access_token" type=password size=50 
+
+placeholder="5622ce6bba702ef6bd3456d5ed26aaa4a28d7c9"> <br>
+Get this from the settings area when logged into <a 
+
+href="http://particle.io/build">http://particle.io/build</a><br><br>
 
 
 
@@ -165,7 +193,9 @@ Get this from the settings area when logged into <a href="http://particle.io/bui
 <input type="button" value="Store the Photon's Token and ID locally!" onClick="{
    localStorage.setItem('myStoredText1', document.all.myToken.value)   
    localStorage.setItem('myStoredText2', document.all.myDeviceId.value)
-   alert( document.all.myToken.value + ' ' +document.all.myDeviceId.value + ' \nHas been stored')
+   alert( document.all.myToken.value + ' ' +document.all.myDeviceId.value + ' 
+
+\nHas been stored')
 }">
 
 
@@ -189,6 +219,11 @@ Get this from the settings area when logged into <a href="http://particle.io/bui
 
 <input type="button" value="d7-send-0" onClick="{
     sendToSpark('d7-send-0')
+}"><br>
+
+
+<input type="button" value="d0-read" onClick="{
+    sendToSpark('d0-read')
 }">
 
 
@@ -207,11 +242,18 @@ Get this from the settings area when logged into <a href="http://particle.io/bui
 
 <input type="button" value="a4-send-255" onClick="{
     sendToSpark('a4-send-255')
+}"><br>
+
+
+Examples of your own code, D7 flashes a bunch<br>
+
+<input type="button" value="x1-mine-15" onClick="{
+    sendToSpark('x1-mine-15')
 }">
-    
-Note: PWM only on A4, A5 presently<br>
 
-
+<input type="button" value="x1-mine-40" onClick="{
+    sendToSpark('x1-mine-40')
+}">
 
 
 
@@ -224,15 +266,29 @@ Note: PWM only on A4, A5 presently<br>
 
 
 
-<div width="400" height="200" name="myDivName" id="myDivId"> output here </div><br>
+<div width="400" height="200" name="myDivName" id="myDivId"> output here 
+
+</div><br>
 
 
 
-<input type=button id="myToVolts" value="Convert Sensor reading into Volts" onclick="{
+<input type=button id="myToVolts" value="Convert Sensor reading into Volts" 
+
+onclick="{
   var myTemp = parseFloat(getElementById('myDivId').innerHTML)
   document.all.myCalc1.value = (myTemp * 3.3 / 4095).toFixed(2);
 }">
 : <input type=text id="myCalc1" value=0 size=5>Volts <br><br><br>
+
+
+
+    
+Note: PWM only works on A4, A5 you will have to write your own code for getting 
+
+to work on the other Digital pins<br>
+Below here are examples of sending your own codes<br>
+Use the same code LetterDigit-4 letters-any size number<br>
+A#-AAAA-#####<br>
 
 
 
