@@ -1,8 +1,6 @@
 
 //PUT YOUR GLOBAL VARIABLES HERE
-    int myDoNormal = 0;   // 0 not yet set,  1 for normal operation, 2 or higher 
-
-for other numbers for own code
+    int myDoNormal = 0;   // 0 not yet set,  1 for normal operation, 2 or higher for other numbers for own code
     int mySetWrite = 0;   
     int myCount = 0;
     int pinNumber = 0;
@@ -44,19 +42,30 @@ void loop(){
         pinMode(D7, OUTPUT);
         digitalWrite(D7, 0);   // D7 Off
         delay(50);
+      } else {
+          myDoNormal = 0
+          myCount = 0;
+          ;
       }
     }  
 
 
 }
 
+
+
+
+
+
+
+
+
+
 // Probably a good idea to leave this stuff alone
 
 int myMain(String myCode) {
     
-    myCode.toUpperCase();           // set argument to uppercase--remove for 
-
-better security
+    myCode.toUpperCase();           // set argument to uppercase--remove for better security
     
     // used send instead of write since I needed it to be 4 characters long.
     
@@ -85,9 +94,7 @@ better security
     }  
     
   
-    myActivity = myCode.substring(3,7);     // take 4 characters starting at the 
-
-3rd.
+    myActivity = myCode.substring(3,7);     // take 4 characters starting at the 3rd.
      
     
     //Following sets the 7 and on characters to integers
@@ -96,9 +103,7 @@ better security
         else if(myOptional == "LOW") {mySetWrite = 0; }
             else if(myOptional == "ON") {mySetWrite = 1;}
                 else if(myOptional == "OFF") {mySetWrite = 0; }
-                   else {mySetWrite = myOptional.toInt();  }  // sets  write 
-
-value
+                   else {mySetWrite = myOptional.toInt();  }  // sets  write value
     
     
     // myCode parsing complete
@@ -122,13 +127,9 @@ value
         
     }  else {      // analog pins activated
     
-        if (myActivity == "READ"){    //Analog read           // pinMode
-
-(pinNumber, INPUT_PULLUP); // sets unknown to max 4095 analog read
+        if (myActivity == "READ"){    //Analog read           // pinMode(pinNumber, INPUT_PULLUP); // sets unknown to max 4095 analog read
            // pinMode(pinNumber, INPUT); // sets to input
-           // pinMode(pinNumber, INPUT_PULLDOWN); // sets unknown to 0 min 
-
-analog read
+           // pinMode(pinNumber, INPUT_PULLDOWN); // sets unknown to 0 min analog read
            // trying nothing, since with the new version of tinker this works
             return analogRead(pinNumber);
         }
@@ -174,12 +175,8 @@ analog read
     
    
        if (myCode.startsWith("X1-MINE")){   // notice all capital letters
-                                            // you may still use mySetWrite and 
-
-myActivity
-                                            // you have to look at the code to 
-
-use pinNumber
+                                            // you may still use mySetWrite and myActivity
+                                            // you have to look at the code to use pinNumber
              myCount = 0;
              return mySetWrite;
         
