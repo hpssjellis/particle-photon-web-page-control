@@ -32,7 +32,7 @@ void loop(){
 
 
     if (myDoNormal == 2) {  // Now you can do your own code here X = 2
-      if (myCount <=  mySetWrite){
+      if (myCount <  mySetWrite){
         myCount ++;
        
         pinMode(D7, OUTPUT);
@@ -43,8 +43,9 @@ void loop(){
         digitalWrite(D7, 0);   // D7 Off
         delay(50);
       } else {
-          myDoNormal = 0
+          myDoNormal = 0;
           myCount = 0;
+          mySetWrite = 0;
           ;
       }
     }  
