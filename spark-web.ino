@@ -5,12 +5,15 @@
     int myCount = 0;
     int pinNumber = 0;
     String  myActivity = "NONE";
+    int myLoops = 0;
+
 
     
  // Any general setup stuff goes here   
 void setup(){
     
-    Particle.function("my-main", myMain);  
+    Particle.function("my-main", myMain); 
+    Particle.subscribe("mytemp", myHandler, MY_DEVICES);   // for using the DO IFTTT button
     
     //PUT YOUR SETUP CODE HERE. Note: Only three more functions allowed!
     // test everything using the return int from a function!
@@ -26,9 +29,40 @@ void setup(){
 
 
 
+
 void loop(){
      
 // use this area for anything that loops around and around
+
+
+
+// here I am testing IFTTT publish
+
+    delay(1);  // slow down the loop
+    myLoops ++;
+   
+    if (myLoops >= 3000){   // wait 3 second betrween measurements actually about 5 seconds
+       myLoops = 0;
+        pinMode(D7, OUTPUT);
+        digitalWrite(D7, 1);   // D7 On
+        delay(20);
+        
+        pinMode(D7, OUTPUT);
+        digitalWrite(D7, 0);   // D7 Off
+        delay(20);
+        
+       if (analogRead(A0) >= 1000){
+          Spark.publish("It is daytime", "1000", 60, PRIVATE);
+       } 
+
+       if (analogRead(A0) <= 30){
+          Spark.publish("It is nighttime", "30", 60, PRIVATE);
+       } 
+    }
+      
+   
+
+// This is more your own code
 
 
     if (myDoNormal == 2) {  // Now you can do your own code here X = 2
@@ -56,7 +90,24 @@ void loop(){
 
 
 
-
+  void myHandler(const char *event, const char *data)    // for the DO or IF   IFTTT button
+  {
+        pinMode(D0, OUTPUT);
+        digitalWrite(D0, 1);   // D7 On
+        delay(2000);
+        
+        pinMode(D0, OUTPUT);
+        digitalWrite(D0, 0);   // D7 Off
+        delay(500);
+        
+        pinMode(D0, OUTPUT);
+        digitalWrite(D0, 1);   // D7 On
+        delay(2000);
+        
+        pinMode(D0, OUTPUT);
+        digitalWrite(D0, 0);   // D7 Off
+        delay(500);
+  }
 
 
 
@@ -166,6 +217,7 @@ int myMain(String myCode) {
    
     if (myCode.startsWith("X")){   // set for your own codes. 
         myDoNormal = 2;           // communicates with the main loop
+       
     }  
    
    
