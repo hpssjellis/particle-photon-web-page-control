@@ -2,6 +2,12 @@
 The simplest way I have made to control a Particle.io Photon using a webpage (formerly Spark.io Core)
 
 
+Live at 
+
+http://hpssjellis.github.io/particle-photon-web-page-control/ajaxBest.html
+
+
+
 
 
 Oct 28, 2015
