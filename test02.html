@@ -1,0 +1,42 @@
+<input type=button value="Particle Async Curl Style Request" onclick="{
+
+  (async function () {
+     try {
+       const myResponse =  await fetch('https://api.particle.io/v1/devices/12345?access_token=c12345')
+       myOutput  = await myResponse.json()    
+       document.getElementById('myDiv01').innerHTML = await 'Name ' + myOutput.name + ', Connected ' + myOutput.connected
+
+     } catch(error) {
+       console.log('Error ' +error);
+     }
+
+  })()   // end of inline async function
+
+
+}">
+
+
+<div id="myDiv01">...</div>
+<hr><br><br>
+
+Returned string and identifiers<br>
+{
+  "id": "0123456789abcdef01234567",
+  "name": "gongbot",
+  "connected": true,
+  "variables": {
+    "Gongs": "int32"
+  },
+  "functions": [
+    "gong",
+    "goto"
+  ],
+  "cc3000_patch_version": "1.29",
+  "product_id": 0,
+  "last_heard": "2015-07-17T22:28:40.907Z",
+  "system_firmware_version": "0.7.0"
+}
+
+
+
+  
